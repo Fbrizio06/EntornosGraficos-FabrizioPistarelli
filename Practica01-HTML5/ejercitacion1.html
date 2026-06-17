@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Ejercitación 1 - Preguntas Teóricas</title>
+</head>
+<body>
+
+<!--
+=============================================================
+PREGUNTA 1:
+¿Qué es HTML, cuándo fue creado, cuáles fueron las distintas
+versiones y cuál es la última?
+=============================================================
+
+RESPUESTA:
+HTML (HyperText Markup Language) es el lenguaje de marcado estándar
+utilizado para crear y estructurar páginas web. Define la estructura
+y el significado semántico del contenido mediante etiquetas (tags).
+Fue creado por Tim Berners-Lee hacia 1989-1991 mientras trabajaba en
+el CERN, con el objetivo de compartir documentos científicos a través
+de Internet.
+
+Versiones principales:
+- HTML 1.0 (1991): Primera versión, muy básica, sin estándar formal.
+- HTML 2.0 (1995): Primer estándar formal, publicado por el IETF.
+- HTML 3.2 (1997): Publicado por el W3C, incorporó tablas, applets y texto alrededor de imágenes.
+- HTML 4.0 (1997): Introdujo hojas de estilo (CSS), scripts y mejoras de accesibilidad.
+- HTML 4.01 (1999): Revisión y corrección de HTML 4.0. Es la versión usada como referencia en esta práctica.
+  Tiene tres variantes de DTD: Strict, Transitional y Frameset.
+- XHTML 1.0 (2000): Reformulación de HTML 4.01 en XML.
+- XHTML 1.1 (2001): Versión más estricta basada en módulos.
+- HTML5 (2014): Publicado por el W3C como recomendación. Es el estándar actual (vigente al momento
+  de redacción). Incorpora elementos semánticos (<article>, <section>, <nav>, etc.), soporte nativo
+  para audio/video, canvas, APIs de JavaScript y elimina elementos obsoletos.
+- HTML Living Standard: Mantenido actualmente por el WHATWG, evoluciona de forma continua y es
+  considerado el estándar "vivo" que los navegadores siguen hoy en día.
+-->
+
+<!--
+=============================================================
+PREGUNTA 2:
+¿Cuáles son los principios básicos que el W3C recomienda seguir
+para la creación de documentos con HTML?
+=============================================================
+
+RESPUESTA:
+El W3C recomienda los siguientes principios básicos:
+
+1. Separación de estructura y presentación:
+   El HTML debe encargarse únicamente de la estructura y el significado
+   semántico del contenido. La presentación visual debe delegarse a CSS.
+   No se deben usar atributos de presentación directamente en el HTML
+   (como color, font, align, bgcolor, etc.).
+
+2. Uso de elementos según su semántica:
+   Cada elemento debe usarse de acuerdo a su significado, no a su
+   apariencia visual. Por ejemplo, <h1>...<h6> para encabezados,
+   <p> para párrafos, <em> para énfasis semántico (no solo cursiva), etc.
+
+3. Accesibilidad:
+   Los documentos deben ser accesibles para personas con discapacidades.
+   Esto incluye proveer texto alternativo en imágenes (atributo alt),
+   usar etiquetas <label> en formularios, y estructurar correctamente
+   los encabezados.
+
+4. Compatibilidad con distintos agentes de usuario:
+   El documento debe poder ser interpretado no solo por navegadores
+   visuales, sino también por lectores de pantalla, navegadores de texto,
+   dispositivos móviles, etc.
+
+5. Validez del documento:
+   Se recomienda que el HTML sea válido según las especificaciones del W3C,
+   lo que incluye declarar correctamente el DOCTYPE y no mezclar elementos
+   de diferentes DTDs.
+
+6. Internacionalización:
+   Especificar el idioma del documento mediante el atributo lang y la
+   codificación de caracteres mediante la etiqueta <meta charset>.
+-->
+
+<!--
+=============================================================
+PREGUNTA 3:
+En las Especificaciones de HTML, ¿cuándo un elemento o atributo
+se considera desaprobado? ¿Y obsoleto?
+=============================================================
+
+RESPUESTA:
+- DESAPROBADO (Deprecated):
+  Un elemento o atributo se considera desaprobado cuando el W3C lo
+  desaconseja su uso en nuevas páginas, aunque todavía es reconocido
+  por los navegadores y forma parte de la especificación. Generalmente
+  fue reemplazado por una solución más moderna (usualmente CSS).
+  Ejemplos en HTML 4.01: <font>, <center>, <b> (como presentación pura),
+  el atributo "align" en párrafos, "bgcolor", "border" en tablas, etc.
+  Los navegadores deben continuar soportándolos por compatibilidad hacia atrás.
+
+- OBSOLETO (Obsolete):
+  Un elemento o atributo se considera obsoleto cuando directamente ya no
+  forma parte de la especificación vigente y los navegadores pueden dejar
+  de soportarlo en cualquier momento. En HTML5, muchos elementos antes
+  "desaprobados" pasaron a ser directamente "obsoletos".
+  Ejemplos en HTML5: <frameset>, <frame>, <noframes>, <applet>, <basefont>.
+
+En resumen: desaprobado = "no lo uses, pero aún funciona";
+            obsoleto    = "ya no forma parte del estándar, puede fallar".
+-->
+
+<!--
+=============================================================
+PREGUNTA 4:
+¿Qué es el DTD y cuáles son los posibles DTDs contemplados
+en la especificación de HTML 4.01?
+=============================================================
+
+RESPUESTA:
+DTD (Document Type Definition) es un documento que define la estructura,
+los elementos permitidos, sus atributos y las reglas de anidamiento de un
+lenguaje de marcado. En HTML, el DTD le indica al navegador (y a los
+validadores) qué versión de HTML se está utilizando y cuáles son las reglas
+a aplicar para interpretar el documento correctamente. Se declara al inicio
+del documento mediante la instrucción <!DOCTYPE>.
+
+HTML 4.01 contempla tres DTDs posibles:
+
+1. HTML 4.01 Strict:
+   Es el DTD más restrictivo. No permite elementos ni atributos desaprobados,
+   ni el uso de frames. Obliga a separar completamente la presentación del
+   contenido. Ideal para documentos bien estructurados.
+   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+
+2. HTML 4.01 Transitional:
+   Permite el uso de elementos y atributos desaprobados (como <font>,
+   <center>, align, bgcolor, etc.) pero NO frames. Es útil cuando se
+   trabaja con código legado o se necesita compatibilidad amplia.
+   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+     "http://www.w3.org/TR/html4/loose.dtd">
+
+3. HTML 4.01 Frameset:
+   Similar al Transitional, pero además permite el uso de frames
+   (<frameset>, <frame>, <noframes>). Se usa cuando la página principal
+   divide la ventana del navegador en marcos.
+   <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
+     "http://www.w3.org/TR/html4/frameset.dtd">
+-->
+
+<!--
+=============================================================
+PREGUNTA 5:
+¿Qué son los metadatos y cómo se especifican en HTML?
+=============================================================
+
+RESPUESTA:
+Los metadatos son datos que describen al propio documento HTML, es decir,
+información "sobre" la página que no se muestra directamente en el contenido
+visible, pero que es utilizada por navegadores, motores de búsqueda,
+servidores web y otros agentes de usuario.
+
+En HTML se especifican principalmente dentro de la sección <head> del
+documento, utilizando la etiqueta <meta>. Esta etiqueta es un elemento
+vacío (no tiene tag de cierre) y utiliza atributos para definir el tipo
+de metadato y su valor.
+
+Formas de especificar metadatos con <meta>:
+
+a) Mediante el atributo NAME + CONTENT:
+   Se usa para describir propiedades del documento.
+   Ejemplos comunes:
+   <meta name="description" content="Descripción de la página" />
+   <meta name="keywords" content="html, web, diseño" />
+   <meta name="author" content="Nombre del autor" />
+   <meta name="robots" content="index, follow" />
+
+b) Mediante el atributo HTTP-EQUIV + CONTENT:
+   Simula encabezados HTTP. El servidor o el navegador los interpreta
+   como si fueran cabeceras de la respuesta HTTP.
+   Ejemplos:
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta http-equiv="refresh" content="5;url=otra-pagina.html" />
+   <meta http-equiv="expires" content="16-Sep-2025 7:49 PM" />
+
+c) El elemento <title>:
+   También es un metadato: define el título del documento que aparece
+   en la pestaña del navegador y en los resultados de búsqueda.
+   <title>Título de la página</title>
+
+d) El elemento <link>:
+   Se usa para vincular recursos externos relacionados al documento,
+   como hojas de estilo o favicons. También es considerado metadato.
+   <link rel="stylesheet" href="estilos.css" type="text/css" />
+-->
+
+
+</body>
+</html>

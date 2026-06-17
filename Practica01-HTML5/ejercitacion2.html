@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Ejercitación 2 - Análisis de Elementos, Tags y Atributos</title>
+</head>
+<body>
+
+
+<!-- ============================================================
+  SEGMENTO 2.a)
+  Código: <!- - Código controlado el día 12/08/2009 - ->
+
+  SECCIÓN DEL DOCUMENTO: Puede colocarse en cualquier parte del documento
+  (tanto en <head> como en <body>). Los comentarios HTML son ignorados
+  por el navegador en cualquier sección.
+
+  EFECTO: No produce ningún efecto visual. Es un comentario que el
+  navegador ignora completamente al renderizar la página. Solo es
+  visible al inspeccionar el código fuente. Se utiliza para dejar
+  anotaciones para los desarrolladores.
+
+  ELEMENTOS / ETIQUETAS:
+  - No es un elemento HTML en sentido estricto, sino una construcción
+    especial de marcado.
+  - Tag de apertura:  <!- -  (sin espacios entre los guiones)
+  - Tag de cierre:    - ->   (sin espacios entre los guiones)
+  - No tiene atributos.
+  - No es obligatorio, pero es una buena práctica de documentación.
+============================================================ -->
+
+<!-- ============================================================
+  SEGMENTO 2.b)
+  Código: <div id="bloque1">Contenido del bloque1</div>
+
+  SECCIÓN DEL DOCUMENTO: Se coloca en el <body>. El elemento <div>
+  es un contenedor de bloque que pertenece al cuerpo del documento.
+
+  EFECTO: Crea un contenedor genérico de tipo bloque (ocupa el ancho
+  completo disponible y genera un salto de línea antes y después).
+  Visualmente no agrega ningún estilo por defecto, pero agrupa el
+  contenido "Contenido del bloque1" para poder aplicarle estilos CSS
+  o manipularlo con JavaScript.
+
+  ELEMENTOS / ETIQUETAS / ATRIBUTOS:
+  - Elemento: div
+  - Tag de apertura: <div>   |   Tag de cierre: </div>
+  - Contenido: "Contenido del bloque1" (texto)
+  - Atributo:
+      Nombre: id
+      Valor:  "bloque1"
+      Obligatorio: NO. Es opcional. Sirve para identificar de forma
+      única al elemento dentro del documento (no puede haber dos
+      elementos con el mismo id). Se usa para CSS y JavaScript.
+============================================================ -->
+
+<!-- ============================================================
+  SEGMENTO 2.c)
+  Código: <img src="" alt="lugar imagen" id="im1" name="im1"
+               width="32" height="32" longdesc="detalles.htm" />
+
+  SECCIÓN DEL DOCUMENTO: Se coloca en el <body>. Representa una
+  imagen dentro del contenido de la página.
+
+  EFECTO: Inserta una imagen en línea dentro del documento. Como el
+  atributo src está vacío (""), no cargará ninguna imagen y el
+  navegador mostrará el texto alternativo definido en alt
+  ("lugar imagen"). El espacio reservado será de 32x32 píxeles.
+
+  ELEMENTOS / ETIQUETAS / ATRIBUTOS:
+  - Elemento: img  (elemento vacío, NO tiene tag de cierre separado;
+    se cierra con /> en XHTML/HTML4 estricto)
+  - Tag: <img ... />
+
+  Atributos:
+  - src       | Valor: ""               | OBLIGATORIO. Especifica la ruta de la imagen.
+                                          Vacío en este caso, por lo que no carga imagen.
+  - alt       | Valor: "lugar imagen"   | OBLIGATORIO (accesibilidad). Texto alternativo
+                                          que se muestra si la imagen no carga, o es leído
+                                          por lectores de pantalla.
+  - id        | Valor: "im1"            | Opcional. Identificador único del elemento.
+  - name      | Valor: "im1"            | Opcional (desaprobado en HTML4 para img).
+                                          Cumplía la misma función que id en versiones anteriores.
+  - width     | Valor: "32"             | Opcional. Ancho de la imagen en píxeles.
+  - height    | Valor: "32"             | Opcional. Alto de la imagen en píxeles.
+  - longdesc  | Valor: "detalles.htm"   | Opcional (desaprobado en HTML5). Enlace a una
+                                          página con descripción larga de la imagen,
+                                          para accesibilidad.
+============================================================ -->
+
+<!-- ============================================================
+  SEGMENTO 2.d)
+  Código:
+  <meta name="keywords" lang="es" content="casa, compra, venta, alquiler" />
+  <meta http-equiv="expires" content="16-Sep-2019 7:49 PM" />
+
+  SECCIÓN DEL DOCUMENTO: Se colocan en el <head>. Son metadatos
+  del documento, no contenido visible.
+
+  EFECTO:
+  - Primera línea: Define palabras clave del documento en español
+    para que los motores de búsqueda (como Google) indexen la página
+    según esos términos. Actualmente los motores de búsqueda modernos
+    dan poco o ningún peso a este metadato, pero sigue siendo válido.
+  - Segunda línea: Indica la fecha y hora de vencimiento del documento.
+    Después de esa fecha, el navegador o caché no debe reutilizar la
+    versión en caché y debe solicitar una nueva al servidor.
+    En este ejemplo, la fecha de expiración ya pasó (2019).
+
+  ELEMENTOS / ETIQUETAS / ATRIBUTOS:
+  - Elemento: meta  (elemento vacío, se cierra con />)
+
+  Primera etiqueta <meta>:
+  - name       | Valor: "keywords"                    | Opcional*. Indica el tipo de metadato.
+  - lang       | Valor: "es"                          | Opcional. Indica el idioma del contenido
+                                                        del atributo content (español).
+  - content    | Valor: "casa, compra, venta, alquiler"| OBLIGATORIO cuando se usa name o
+                                                        http-equiv. Contiene el valor del metadato.
+
+  Segunda etiqueta <meta>:
+  - http-equiv | Valor: "expires"                     | Opcional*. Simula un encabezado HTTP.
+  - content    | Valor: "16-Sep-2019 7:49 PM"         | OBLIGATORIO cuando se usa http-equiv.
+                                                        Define la fecha de expiración.
+
+  * name o http-equiv no son individualmente obligatorios, pero <meta> requiere
+    al menos uno de los dos para tener sentido semántico.
+============================================================ -->
+
+<!-- ============================================================
+  SEGMENTO 2.e)
+  Código:
+  <a href="http://www.e-style.com.ar/resumen.html" type="text/html"
+     hreflang="es" charset="utf-8" rel="help">Resumen HTML</a>
+
+  SECCIÓN DEL DOCUMENTO: Se coloca en el <body>. Es un enlace
+  (hipervínculo) dentro del contenido de la página.
+
+  EFECTO: Muestra el texto "Resumen HTML" como un enlace clicable.
+  Al hacer clic, navega hacia la URL indicada en href. Los atributos
+  adicionales aportan información semántica sobre el destino del enlace:
+  es un documento HTML en español codificado en UTF-8, y su relación
+  con el documento actual es de "ayuda" (help).
+
+  ELEMENTOS / ETIQUETAS / ATRIBUTOS:
+  - Elemento: a  (anchor / ancla)
+  - Tag de apertura: <a>   |   Tag de cierre: </a>
+  - Contenido: "Resumen HTML" (texto visible del enlace)
+
+  Atributos:
+  - href      | Valor: "http://www.e-style.com.ar/resumen.html" | OBLIGATORIO para que
+                sea un enlace funcional. Indica la URL de destino.
+  - type      | Valor: "text/html"                              | Opcional. Indica el tipo
+                MIME del recurso enlazado. Ayuda al navegador a decidir cómo manejarlo.
+  - hreflang  | Valor: "es"                                     | Opcional. Indica el idioma
+                del documento de destino (español).
+  - charset   | Valor: "utf-8"                                  | Opcional (desaprobado en HTML5).
+                Indicaba la codificación de caracteres del recurso enlazado.
+  - rel       | Valor: "help"                                   | Opcional. Define la relación
+                entre el documento actual y el enlazado. "help" indica que el destino
+                es una página de ayuda relacionada con el contenido actual.
+============================================================ -->
+
+<!-- ============================================================
+  SEGMENTO 2.f)
+  Código:
+  <table width="200" summary="Datos correspondientes al ejercicio vencido">
+    <caption align="top"> Título </caption>
+    <tr>
+      <th scope="col">&nbsp;</th>
+      <th scope="col">A</th>
+      <th scope="col">B</th>
+      <th scope="col">C</th>
+    </tr>
+    <tr>
+      <th scope="row">1º</th>
+      <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+    <tr>
+      <th scope="row">2º</th>
+      <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+    </tr>
+  </table>
+
+  SECCIÓN DEL DOCUMENTO: Se coloca en el <body>. Es una tabla de datos.
+
+  EFECTO: Renderiza una tabla de 200px de ancho con un título ("Título")
+  en la parte superior, una fila de encabezados de columnas (vacío, A, B, C)
+  y dos filas de datos con encabezados de fila (1º, 2º) y celdas vacías.
+  Visualmente sin bordes (no se especifica border). Las celdas vacías
+  contienen &nbsp; (espacio en blanco no separable) para evitar que
+  el navegador las colapse.
+
+  ELEMENTOS / ETIQUETAS / ATRIBUTOS:
+  - table: contenedor principal de la tabla.
+      width   | "200"    | Opcional. Ancho en píxeles (desaprobado en HTML5, usar CSS).
+      summary | "Datos…" | Opcional. Descripción de la tabla para lectores de pantalla
+                           (desaprobado en HTML5).
+
+  - caption: Título de la tabla. Debe ser el primer hijo de <table>.
+      align   | "top"    | Opcional (desaprobado). Posición del título. "top" = arriba.
+
+  - tr: fila de la tabla. No tiene atributos significativos en este ejemplo.
+      No tiene atributos propios aquí. OBLIGATORIO para estructurar filas.
+
+  - th: celda de encabezado. Se muestra en negrita y centrada por defecto.
+      scope   | "col"/"row" | Opcional (accesibilidad). Indica si el encabezado
+                               corresponde a una columna ("col") o a una fila ("row").
+
+  - td: celda de datos estándar.
+      Sin atributos en este ejemplo. Contiene &nbsp; (entidad HTML para
+      espacio no separable) para que la celda no colapse.
+============================================================ -->
+
+<h2>Demostraci&oacute;n visual de los segmentos</h2>
+
+<h3>2.b) &mdash; Div con id</h3>
+<div id="bloque1">Contenido del bloque1</div>
+
+<h3>2.c) &mdash; Imagen (src vac&iacute;o, se muestra alt)</h3>
+<img src="" alt="lugar imagen" id="im1" name="im1" width="32" height="32" longdesc="detalles.htm" />
+
+<h3>2.e) &mdash; Enlace con atributos sem&aacute;nticos</h3>
+<a href="http://www.e-style.com.ar/resumen.html" type="text/html" hreflang="es" charset="utf-8" rel="help">Resumen HTML</a>
+
+<h3>2.f) &mdash; Tabla con caption, th y scope</h3>
+<table width="200" border="1" summary="Datos correspondientes al ejercicio vencido">
+  <caption align="top">T&iacute;tulo</caption>
+  <tr>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">A</th>
+    <th scope="col">B</th>
+    <th scope="col">C</th>
+  </tr>
+  <tr>
+    <th scope="row">1&ordm;</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th scope="row">2&ordm;</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+</body>
+</html>

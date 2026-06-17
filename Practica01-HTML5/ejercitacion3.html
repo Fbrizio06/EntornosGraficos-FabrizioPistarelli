@@ -1,0 +1,573 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Ejercitación 3 - Anclas, Listas, Tablas y Formularios</title>
+</head>
+<body>
+
+
+<a name="arriba" id="arriba"></a>
+
+<h1>Ejercitaci&oacute;n 3</h1>
+<p>Diferencias entre segmentos de c&oacute;digo y sus visualizaciones.</p>
+<hr />
+
+<!-- ==============================================================
+  3.a) ANCLAS Y ENLACES
+  Diferencias entre variantes del tag <a>:
+
+  1) <a href="http://www.google.com.ar">Click aquí para ir a Google</a>
+     Enlace externo básico. Abre Google en la MISMA pestaña/ventana.
+
+  2) <a href="http://www.google.com.ar" target="_blank">Click aquí para ir a Google</a>
+     Igual al anterior pero target="_blank" hace que se abra en una
+     NUEVA pestaña o ventana del navegador.
+
+  3) <a href="http://www.google.com.ar" type="text/html" hreflang="es" charset="utf-8" rel="help">
+     Enlace con atributos semánticos adicionales: type indica el tipo
+     MIME del destino, hreflang el idioma del recurso destino,
+     charset su codificación (desaprobado en HTML5) y rel="help"
+     la relación entre documentos. Visualmente idéntico al primer caso,
+     pero aporta información semántica para navegadores y lectores de pantalla.
+     NOTA: en el código del práctico, el href tiene un espacio en la URL
+     ("http://www. google..."), lo que lo haría un enlace roto.
+     No tiene texto visible entre las etiquetas, por lo que no muestra
+     ningún texto clicable.
+
+  4) <a href="#">Click aquí para ir a Google</a>
+     El href="#" apunta al inicio del documento actual (o no navega a
+     ningún lado en términos prácticos). No va a Google. Es un enlace
+     que "no va a ningún lado", usado frecuentemente como placeholder
+     en desarrollo o para disparar eventos JavaScript.
+
+  5) <a href="#arriba">Click aquí para volver arriba</a>
+     Enlace interno (ancla interna). El href="#arriba" busca dentro
+     del mismo documento un elemento con id="arriba" o name="arriba"
+     y hace scroll hasta esa posición. No navega a otra página.
+
+  6) <a name="arriba" id="arriba"></a>
+     No es un enlace de navegación sino un MARCADOR o ANCLA DE DESTINO.
+     Define el punto al que llegarán los enlaces con href="#arriba".
+     No tiene contenido visible ni produce texto clicable.
+     En HTML4 se usaba name; en HTML5 se reemplaza por id en cualquier elemento.
+============================================================== -->
+
+<h2>3.a) </h2>
+
+<p><a href="http://www.google.com.ar">1) Enlace b&aacute;sico (misma pesta&ntilde;a)</a></p>
+<p><a href="http://www.google.com.ar" target="_blank">2) Enlace en nueva pesta&ntilde;a (target="_blank")</a></p>
+<p><a href="http://www.google.com.ar" type="text/html" hreflang="es" charset="utf-8" rel="help">3) Enlace con atributos sem&aacute;nticos</a></p>
+<p><a href="#">4) Enlace a "#" (permanece en la p&aacute;gina)</a></p>
+<p><a href="#arriba">5) Enlace interno: volver arriba</a></p>
+<a name="marcador_demo" id="marcador_demo"></a>
+<p><em>6) La l&iacute;nea anterior es el ancla de destino (invisible, sin contenido)</em></p>
+
+<hr />
+
+<!-- ==============================================================
+  3.b) IMAGEN + ENLACE: combinaciones
+  Diferencias entre las cuatro variantes:
+
+  1) <p><img src="im1.jpg" alt="imagen1" /><a href="...">Click aquí</a></p>
+     La imagen y el enlace son elementos SEPARADOS e independientes.
+     La imagen no es clicable; solo el texto "Click aquí" funciona como enlace.
+
+  2) <p><a href="..."><img src="im1.jpg" alt="imagen1" /></a> Click aquí</p>
+     La IMAGEN es el enlace clicable (está dentro de <a>).
+     El texto "Click aquí" está fuera del <a>, por lo que NO es clicable.
+
+  3) <p><a href="..."><img src="im1.jpg" alt="imagen1" />Click aquí</a></p>
+     Tanto la imagen COMO el texto "Click aquí" están dentro de <a>,
+     por lo que AMBOS son clicables y llevan al mismo destino.
+     Es el enlace más amplio en área clicable.
+
+  4) <p><a href="..."><img .../></a> <a href="...">Click aquí</a></p>
+     La imagen y el texto son DOS enlaces separados pero apuntan al mismo
+     destino. Cada uno es independientemente clicable. Hay un espacio
+     entre ellos. El resultado visual es similar al caso 3 pero con
+     dos elementos <a> distintos.
+============================================================== -->
+
+<h2>3.b) </h2>
+
+<p>1) Imagen separada del enlace:<br />
+<img src="im1.jpg" alt="imagen1" width="32" height="32" />
+<a href="http://www.google.com.ar">Click aqu&iacute;</a></p>
+
+<p>2) Imagen como enlace, texto fuera:<br />
+<a href="http://www.google.com.ar"><img src="im1.jpg" alt="imagen1" width="32" height="32" /></a> Click aqu&iacute;</p>
+
+<p>3) Imagen Y texto dentro del enlace:<br />
+<a href="http://www.google.com.ar"><img src="im1.jpg" alt="imagen1" width="32" height="32" />Click aqu&iacute;</a></p>
+
+<p>4) Imagen y texto como dos enlaces independientes:<br />
+<a href="http://www.google.com.ar"><img src="im1.jpg" alt="imagen1" width="32" height="32" /></a>
+<a href="http://www.google.com.ar">Click aqu&iacute;</a></p>
+
+<hr />
+
+<!-- ==============================================================
+  3.c) LISTAS
+  Diferencias entre las cuatro variantes:
+
+  1) <ul>: Lista NO ORDENADA. Los ítems se muestran con viñetas (bullets).
+     No hay numeración. El orden visual no implica jerarquía.
+     Resultado: • xxx  • yyy  • zzz
+
+  2) <ol> con tres <li>: Lista ORDENADA en un único bloque.
+     Los ítems se numeran automáticamente: 1. xxx  2. yyy  3. zzz
+
+  3) Tres <ol> separados, cada uno con un <li> y value distinto:
+     Cada lista ordenada es independiente, por lo que la numeración
+     reinicia en cada bloque. Sin embargo, el atributo value en <li>
+     permite forzar el número de ese ítem:
+     - Primera <ol>: 1. xxx  (numeración normal desde 1)
+     - Segunda <ol>: 2. yyy  (value="2" fuerza el número 2)
+     - Tercera <ol>: 3. zzz  (value="3" fuerza el número 3)
+     Visualmente parecen una lista continua pero son tres listas
+     independientes con los números forzados. No es la forma correcta
+     de hacer una lista continua.
+
+  4) <blockquote><p>...<br />...</p></blockquote>:
+     No es una lista real. Es un párrafo con saltos de línea (<br />)
+     dentro de un bloque de cita (blockquote), que por defecto agrega
+     indentación. Los "números" son texto literal, no generados por HTML.
+     No tiene semántica de lista.
+============================================================== -->
+
+<h2>3.c) </h2>
+
+<table border="1" cellpadding="8">
+  <tr>
+    <th>ul (no ordenada)</th>
+    <th>ol (ordenada, 1 bloque)</th>
+    <th>ol separadas con value</th>
+    <th>blockquote (pseudo-lista)</th>
+  </tr>
+  <tr>
+    <td>
+      <ul>
+        <li>xxx</li>
+        <li>yyy</li>
+        <li>zzz</li>
+      </ul>
+    </td>
+    <td>
+      <ol>
+        <li>xxx</li>
+        <li>yyy</li>
+        <li>zzz</li>
+      </ol>
+    </td>
+    <td>
+      <ol><li>xxx</li></ol>
+      <ol><li value="2">yyy</li></ol>
+      <ol><li value="3">zzz</li></ol>
+    </td>
+    <td>
+      <blockquote>
+        <p>1. xxx<br />
+        2. yyy<br />
+        3. zzz</p>
+      </blockquote>
+    </td>
+  </tr>
+</table>
+
+<hr />
+
+<!-- ==============================================================
+  3.d) TABLAS: <th> vs <td> con <div> y <strong>
+  Diferencias:
+
+  Tabla 1: Usa <th> para las celdas de encabezado de la primera fila.
+  <th> es semánticamente un encabezado: el navegador lo muestra en
+  negrita y centrado por defecto. Es la forma correcta y semántica
+  de marcar encabezados de columna.
+
+  Tabla 2: En lugar de <th>, usa <td> con <div align="center"> y
+  <strong> para simular visualmente el mismo resultado. El efecto
+  visual puede ser similar (texto en negrita y centrado), pero
+  semánticamente son celdas de datos, no encabezados. Pierde
+  accesibilidad (los lectores de pantalla no las identifican como
+  encabezados de columna).
+============================================================== -->
+
+<h2>3.d) </h2>
+
+<table border="1" width="300">
+  <tr>
+    <th>Columna 1</th>
+    <th>Columna 2</th>
+  </tr>
+  <tr>
+    <td>Celda 1</td>
+    <td>Celda 2</td>
+  </tr>
+  <tr>
+    <td>Celda 3</td>
+    <td>Celda 4</td>
+  </tr>
+</table>
+
+<br />
+
+<table border="1" width="300">
+  <tr>
+    <td><div align="center"><strong>Columna 1</strong></div></td>
+    <td><div align="center"><strong>Columna 2</strong></div></td>
+  </tr>
+  <tr>
+    <td>Celda 1</td>
+    <td>Celda 2</td>
+  </tr>
+  <tr>
+    <td>Celda 3</td>
+    <td>Celda 4</td>
+  </tr>
+</table>
+
+<hr />
+
+<!-- ==============================================================
+  3.e) TABLAS: <caption> vs celda con colspan
+  Diferencias:
+
+  Tabla 1 (con <caption>):
+  Usa el elemento semántico <caption> para el título de la tabla.
+  <caption align="top"> lo posiciona encima. El título queda
+  fuera de la estructura de filas/celdas. Es el método correcto y
+  accesible para titular una tabla.
+
+  Tabla 2 (con colspan):
+  Simula el título usando una celda <td colspan="3"> en la primera
+  fila, con contenido centrado via <div align="center">. Visualmente
+  puede verse igual, pero semánticamente es una celda de datos, no
+  un título de tabla. No es interpretado por lectores de pantalla
+  como el título de la tabla.
+============================================================== -->
+
+<h2>3.e) </h2>
+
+<table width="200" border="1">
+  <caption align="top">T&iacute;tulo (caption)</caption>
+  <tr>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+</table>
+
+<br />
+
+<table width="200" border="1">
+  <tr>
+    <td colspan="3"><div align="center">T&iacute;tulo (colspan)</div></td>
+  </tr>
+  <tr>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+</table>
+
+<hr />
+
+<!-- ==============================================================
+  3.f) TABLAS: rowspan vs colspan
+  Diferencias:
+
+  Tabla 1 (rowspan):
+  La segunda fila tiene una celda con rowspan="2": esa celda ocupa
+  verticalmente dos filas. Las otras celdas de esas dos filas se
+  posicionan a su derecha. Resultado: una celda alta a la izquierda
+  con dos celdas apiladas a su derecha.
+
+  Tabla 2 (colspan en segunda fila):
+  La segunda fila tiene una celda con colspan="2": esa celda ocupa
+  horizontalmente dos columnas en esa fila. La tercera fila tiene
+  tres celdas normales. Resultado: segunda fila con una celda ancha
+  y una normal, tercera fila con tres celdas iguales.
+============================================================== -->
+
+<h2>3.f)</h2>
+
+<table width="200" border="1">
+  <tr>
+    <td colspan="3"><div align="center">T&iacute;tulo</div></td>
+  </tr>
+  <tr>
+    <td rowspan="2" bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+</table>
+
+<br />
+
+<table width="200" border="1">
+  <tr>
+    <td colspan="3"><div align="center">T&iacute;tulo</div></td>
+  </tr>
+  <tr>
+    <td colspan="2" bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+  <tr>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+    <td bgcolor="#dddddd">&nbsp;</td>
+  </tr>
+</table>
+
+<hr />
+
+<!-- ==============================================================
+  3.g) TABLAS: colspan+rowspan combinados / cellpadding y cellspacing
+  Diferencias:
+
+  Tabla 1 (colspan="2" rowspan="2"):
+  La celda central usa ambos atributos simultáneamente: ocupa 2 columnas
+  de ancho Y 2 filas de alto. Es una celda grande que abarca un bloque
+  de 2x2. A su derecha hay una celda en la primera fila, y debajo de
+  esa celda hay otra en la segunda fila.
+
+  Tabla 2 (cellpadding="0" cellspacing="0"):
+  Aquí la diferencia no está en el spanning sino en los atributos de
+  espaciado de la tabla:
+  - cellpadding="0": elimina el espacio interior de cada celda (entre
+    el borde y el contenido).
+  - cellspacing="0": elimina el espacio entre las celdas (el hueco
+    entre bordes de celdas adyacentes).
+  Resultado: las celdas quedan perfectamente juntas sin separación ni
+  relleno interno, lo que da un aspecto más compacto. También usa
+  rowspan="2" pero sin colspan.
+============================================================== -->
+
+<h2>3.g) </h2>
+
+<table width="200" border="1">
+  <tr>
+    <td colspan="3"><div align="center">T&iacute;tulo</div></td>
+  </tr>
+  <tr>
+    <td colspan="2" rowspan="2">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%">&nbsp;</td>
+  </tr>
+</table>
+
+<br />
+
+<table width="200" border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan="2"><div align="center">T&iacute;tulo</div></td>
+  </tr>
+  <tr>
+    <td rowspan="2">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="50%">&nbsp;</td>
+  </tr>
+</table>
+
+<hr />
+
+<!-- ==============================================================
+  3.h) FORMULARIOS: tres variantes
+  Diferencias:
+
+  Formulario 1 (form1):
+  - action="procesar.php": los datos se envían a un script PHP.
+  - method="post": los datos viajan en el cuerpo de la petición HTTP
+    (no visibles en la URL). Más seguro para datos sensibles.
+  - target="_blank": el resultado se abre en nueva pestaña.
+  - Usa <fieldset> y <legend> para agrupar los campos visualmente.
+  - El campo clave es type="password" (oculta los caracteres al escribir).
+  - Los inputs tienen value="xxx" (valores precargados).
+  - Botón type="submit": envía el formulario.
+
+  Formulario 2 (form2):
+  - action="" (vacío): los datos se envían a la misma página.
+  - method="get": los datos viajan en la URL como parámetros
+    (?usu2=valor&clave2=valor). Visible en la barra de direcciones.
+    Menos seguro para contraseñas.
+  - Sin fieldset: los campos se presentan sin agrupación visual.
+  - Usa <label> correctamente envolviendo el input (asociación implícita).
+  - Ambos campos son type="text" (la clave NO está oculta, error de diseño).
+  - Sin value precargado (campos vacíos al cargar).
+
+  Formulario 3 (form3):
+  - action="mailto:xx@xx.com": intenta enviar el formulario por correo
+    electrónico. Depende del cliente de correo instalado en el equipo.
+    Es una práctica obsoleta y poco confiable.
+  - enctype="text/plain": el contenido se envía como texto plano,
+    sin codificación especial. Solo válido con mailto.
+  - method="post" con mailto es inconsistente según los navegadores.
+  - El botón es type="reset" (NO envía, sino que BORRA/reinicia los campos).
+    El value="Enviar" es engañoso porque no envía nada, solo resetea.
+============================================================== -->
+
+<h2>3.h) </h2>
+
+<h3>Formulario 1: POST a PHP, fieldset, password, submit</h3>
+<form id="form1" name="form1" action="procesar.php" method="post" target="_blank">
+  <fieldset>
+    <legend>LOGIN</legend>
+    Usuario: <input type="text" id="usu1" name="usu1" value="xxx" /><br />
+    Clave: <input type="password" id="clave1" name="clave1" value="xxx" />
+  </fieldset>
+  <input type="submit" id="boton1" name="boton1" value="Enviar" />
+</form>
+
+<h3>Formulario 2: GET a misma p&aacute;gina, sin fieldset, ambos text</h3>
+<form id="form2" name="form2" action="" method="get" target="_blank">
+  LOGIN<br />
+  <label>Usuario: <input type="text" id="usu2" name="usu2" /></label><br />
+  <label>Clave: <input type="text" id="clave2" name="clave2" /></label><br />
+  <input type="submit" id="boton2" name="boton2" value="Enviar" />
+</form>
+
+<h3>Formulario 3: mailto, enctype text/plain, bot&oacute;n reset (¡no env&iacute;a!)</h3>
+<form id="form3" name="form3" action="mailto:xx@xx.com" enctype="text/plain" method="post" target="_blank">
+  <fieldset>
+    <legend>LOGIN</legend>
+    Usuario: <input type="text" id="usu3" name="usu3" /><br />
+    Clave: <input type="password" id="clave3" name="clave3" />
+  </fieldset>
+  <input type="reset" id="boton3" name="boton3" value="Enviar" />
+</form>
+
+<hr />
+
+<!-- ==============================================================
+  3.i) BOTONES: <button> vs <input type="button">
+  Diferencias:
+
+  Botón 1 (<button>):
+  El elemento <button> puede contener HTML en su interior: en este caso
+  tiene una imagen (<img>) y texto en negrita (<b>CLICK AQUÍ</b>).
+  Es más flexible y permite crear botones con contenido rico (íconos,
+  imágenes, texto formateado). type="button" indica que no es submit ni reset.
+
+  Botón 2 (<input type="button">):
+  Es un elemento vacío: solo muestra el texto del atributo value.
+  No puede contener imágenes ni HTML en su interior. Es más simple
+  pero menos flexible que <button>.
+============================================================== -->
+
+<h2>3.i) </h2>
+
+<label>Bot&oacute;n 1 (button con img y texto):
+  <button type="button" name="boton1b" id="boton1b">
+    <img src="logo.jpg" alt="Bot&oacute;n con imagen" width="30" height="20" /><br />
+    <b>CLICK AQU&Iacute;</b>
+  </button>
+</label>
+
+<br /><br />
+
+<label>Bot&oacute;n 2 (input type button, solo texto):
+  <input type="button" name="boton2b" id="boton2b" value="CLICK AQU&Iacute;" />
+</label>
+
+<hr />
+
+<!-- ==============================================================
+  3.j) RADIO BUTTONS: mismo name vs names distintos
+  Diferencias:
+
+  Grupo 1: Ambos radio tienen name="opcion" (igual).
+  Los radio buttons con el MISMO name forman un grupo exclusivo:
+  solo se puede seleccionar UNO a la vez. Al elegir X se deselecciona Y
+  y viceversa. Esto es el comportamiento correcto para opciones mutuamente
+  excluyentes.
+
+  Grupo 2: Cada radio tiene un name distinto (opcion1 y opcion2).
+  Al tener names diferentes, NO forman un grupo: son dos controles
+  independientes. Se pueden seleccionar AMBOS simultáneamente.
+  Esto es incorrecto para opciones mutuamente excluyentes.
+  Además, al enviar el formulario, se envían como dos campos separados.
+============================================================== -->
+
+<h2>3.j)</h2>
+
+<h3>Grupo 1: mismo name (excluyentes, correcto)</h3>
+<p>
+  <label><input type="radio" name="opcion" id="X1" value="X" />X</label><br />
+  <label><input type="radio" name="opcion" id="Y1" value="Y" />Y</label>
+</p>
+
+<h3>Grupo 2: names distintos (independientes, incorrecto para exclusi&oacute;n)</h3>
+<p>
+  <label><input type="radio" name="opcion1" id="X2" value="X" />X</label><br />
+  <label><input type="radio" name="opcion2" id="Y2" value="Y" />Y</label>
+</p>
+
+<hr />
+
+<!-- ==============================================================
+  3.k) SELECT: simple vs multiple
+  Diferencias:
+
+  Select 1 (name="lista", sin multiple):
+  Lista desplegable estándar. Solo se puede seleccionar UNA opción
+  a la vez. Se muestra como un menú desplegable compacto.
+  Los <optgroup> agrupan las opciones con un rótulo no seleccionable.
+
+  Select 2 (name="lista[]", multiple="multiple"):
+  Lista de selección múltiple. Se muestran varias opciones visibles
+  simultáneamente (no es desplegable sino un cuadro de lista).
+  El usuario puede seleccionar VARIAS opciones manteniendo Ctrl (o Cmd
+  en Mac). El name="lista[]" con corchetes es convención de PHP para
+  recibir un array de valores seleccionados en el servidor.
+============================================================== -->
+
+<h2>3.k) </h2>
+
+<h3>Select simple (una opci&oacute;n a la vez)</h3>
+<select name="lista">
+  <optgroup label="Caso 1">
+    <option>Mayo</option>
+    <option>Junio</option>
+  </optgroup>
+  <optgroup label="Caso 2">
+    <option>Mayo</option>
+    <option>Junio</option>
+  </optgroup>
+</select>
+
+<br /><br />
+
+<h3>Select m&uacute;ltiple (varias opciones con Ctrl+Click)</h3>
+<select name="lista[]" multiple="multiple">
+  <optgroup label="Caso 1">
+    <option>Mayo</option>
+    <option>Junio</option>
+  </optgroup>
+  <optgroup label="Caso 2">
+    <option>Mayo</option>
+    <option>Junio</option>
+  </optgroup>
+</select>
+
+</body>
+</html>
