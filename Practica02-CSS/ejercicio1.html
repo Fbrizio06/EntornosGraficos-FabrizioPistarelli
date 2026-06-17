@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+
+  <title>Ejercicio 1 - CSS: Preguntas Teóricas</title>
+</head>
+<body>
+
+<h1>Ejercicio 1 ; Introducción a CSS</h1>
+<p>Las respuestas completas se encuentran en los comentarios del código fuente de este documento.</p>
+<hr />
+
+<!--
+PREGUNTA 1: ¿Qué es CSS y para qué se usa?
+=============================================================
+
+RESPUESTA:
+CSS (Cascading Style Sheets / Hojas de Estilo en Cascada) es un lenguaje
+que describe cómo debe presentarse visualmente un documento HTML: colores,
+tipografías, espaciados, bordes, posicionamiento de elementos, etc.
+
+Se usa para separar la estructura y el contenido (definidos en HTML) de la
+presentación visual (definida en CSS). Esto permite mantener el diseño de
+forma centralizada, reutilizarlo en múltiples páginas y facilitar el
+mantenimiento, ya que un cambio en la hoja de estilos se refleja en todos
+los documentos que la utilicen.
+-->
+
+<!--
+=============================================================
+PREGUNTA 2: CSS utiliza reglas para las declaraciones de estilo,
+¿cómo funcionan?
+=============================================================
+
+RESPUESTA:
+Una regla CSS está compuesta por dos partes:
+
+1. SELECTOR: indica a qué elemento o elementos del documento HTML se
+   aplicará el estilo (por ejemplo: p, .clase, #id).
+
+2. BLOQUE DE DECLARACIÓN: encerrado entre llaves { }, contiene una o
+   más declaraciones. Cada declaración es un par PROPIEDAD: VALOR;
+   separado por punto y coma.
+
+Ejemplo:
+  p { color: red; font-size: 12px; }
+
+  Selector: p
+  Declaraciones: color: red;  y  font-size: 12px;
+
+Cuando el navegador procesa el documento, busca todos los elementos
+que coincidan con el selector y les aplica las declaraciones indicadas.
+-->
+
+<!--
+=============================================================
+PREGUNTA 3: ¿Cuáles son las tres formas de dar estilo a un documento?
+=============================================================
+
+RESPUESTA:
+1. ESTILO EXTERNO:
+   Se define en un archivo .css separado y se vincula al HTML mediante
+   la etiqueta <link> en el <head>:
+   <link rel="stylesheet" type="text/css" href="estilo.css" />
+   Es la forma más recomendada: permite reutilizar el mismo estilo en
+   múltiples páginas y separa completamente contenido de presentación.
+
+2. ESTILO INTERNO (EMBEBIDO):
+   Se define dentro de la etiqueta <style> en el <head> del propio
+   documento HTML. Solo afecta a esa página en particular.
+   <style> p { color: blue; } </style>
+
+3. ESTILO EN LÍNEA (INLINE):
+   Se aplica directamente sobre un elemento HTML mediante el atributo
+   style. Afecta únicamente a ese elemento puntual.
+   <p style="color: blue;">Texto</p>
+   Es la forma menos recomendable porque mezcla contenido con
+   presentación, aunque tiene la mayor prioridad en la cascada.
+-->
+
+<!--
+=============================================================
+PREGUNTA 4: ¿Cuáles son los distintos tipos de selectores más
+utilizados? Ejemplifique cada uno.
+=============================================================
+
+RESPUESTA:
+- SELECTOR DE ELEMENTO (o de tipo): selecciona todas las etiquetas de
+  ese tipo en el documento.
+  Ejemplo: p { color: black; }  -->  afecta a todos los <p>
+
+- SELECTOR DE CLASE: selecciona elementos que tengan el atributo
+  class con ese valor. Se escribe con un punto antes del nombre.
+  Puede aplicarse a múltiples elementos de distinto tipo.
+  Ejemplo: .destacado { color: red; }  -->  afecta a <p class="destacado">,
+  <div class="destacado">, etc.
+
+- SELECTOR DE ID: selecciona un único elemento que tenga ese id
+  (los id deben ser únicos en el documento). Se escribe con #.
+  Ejemplo: #menu { background-color: yellow; }  -->  afecta solo a
+  <div id="menu">
+
+- SELECTOR UNIVERSAL: el asterisco (*) selecciona TODOS los elementos
+  del documento.
+  Ejemplo: * { margin: 0; padding: 0; }
+
+- SELECTOR DESCENDIENTE: combina dos o más selectores separados por
+  un espacio. Selecciona elementos que estén anidados dentro de otro,
+  sin importar el nivel de profundidad.
+  Ejemplo: div p { color: green; }  -->  afecta solo a los <p> que
+  estén dentro de un <div>
+
+- SELECTOR DE PSEUDO-CLASE: selecciona un elemento según su estado.
+  Ejemplo: a:hover { color: orange; }  -->  afecta al enlace solo
+  cuando el mouse está sobre él.
+-->
+
+<!--
+=============================================================
+PREGUNTA 5: ¿Qué es una pseudo-clase? ¿Cuáles son las más utilizadas
+aplicadas a vínculos?
+=============================================================
+
+RESPUESTA:
+Una pseudo-clase es un selector que permite aplicar un estilo a un
+elemento según su ESTADO actual o su POSICIÓN dentro del documento,
+en lugar de basarse en su tipo, clase o id. Se escribe agregando dos
+puntos (:) después del selector base.
+
+
+<!--
+=============================================================
+PREGUNTA 6: ¿Qué es la herencia?
+=============================================================
+
+RESPUESTA:
+La herencia es el mecanismo por el cual ciertas propiedades CSS
+aplicadas a un elemento "padre" se transmiten automáticamente a sus
+elementos "hijos" (los elementos anidados dentro de él), a menos que
+estos últimos tengan una regla propia más específica que sobrescriba
+ese valor heredado.
+
+Ejemplo: si se define color: blue; en el selector body, todo el
+texto contenido dentro del body (párrafos, listas, encabezados, etc.)
+heredará ese color de letra, salvo que se indique explícitamente
+otro color para alguno de esos elementos.
+
+Es importante notar que NO todas las propiedades son heredables.
+Por ejemplo, propiedades como color o font-family sí se heredan,
+pero propiedades como border, margin o padding NO se heredan por
+defecto.
+-->
+
+<!--
+=============================================================
+PREGUNTA 7: ¿En qué consiste el proceso denominado cascada?
+=============================================================
+
+RESPUESTA:
+La "cascada" es el mecanismo que utiliza el navegador para decidir
+qué regla de estilo aplicar finalmente cuando existen VARIAS reglas
+distintas que afectan a la misma propiedad de un mismo elemento
+(por ejemplo, una regla en una hoja externa, otra interna y otra en
+línea, todas indicando un color distinto para el mismo párrafo).
+
+El navegador resuelve estos conflictos evaluando, en este orden:
+
+1. ORIGEN E IMPORTANCIA: las declaraciones marcadas con !important
+   tienen prioridad sobre el resto. Luego se consideran los estilos
+   del autor de la página, y por último los estilos por defecto del
+   navegador.
+
+2. ESPECIFICIDAD DEL SELECTOR: cuanto más específico es un selector,
+   mayor prioridad tiene. Un selector de ID es más específico que uno
+   de clase, y uno de clase es más específico que uno de tipo de
+   elemento. El estilo en línea (inline) es aún más específico que
+   un id.
+
+3. ORDEN DE APARICIÓN: si dos reglas tienen exactamente la misma
+   especificidad, gana la que fue declarada ÚLTIMA en el código
+   (la que aparece más abajo, o el archivo CSS vinculado más
+   recientemente).
+-->
+
+<p><em>Ver el código fuente del documento para leer las respuestas completas.</em></p>
+
+</body>
+</html>

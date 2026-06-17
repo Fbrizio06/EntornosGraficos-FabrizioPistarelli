@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+
+  <title>Ejercicio 2 - CSS: Selectores de ID</title>
+  <style>
+    p#normal {
+      font-family: arial, helvetica;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    *#destacado {
+      border-style: solid;
+      border-color: blue;
+      border-width: 2px;
+    }
+    #distinto {
+      background-color: #9EC7EB;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ejercicio 2 Análisis de selectores por ID</h1>
+<hr />
+
+<!-- ============================================================
+  DECLARACIONES DE REGLAS (en el <style>):
+
+  1) p#normal { font-family: arial,helvetica; font-size: 11px; font-weight: bold; }
+     SELECTOR COMPUESTO: combina el selector de elemento "p" con el
+     selector de id "#normal". Esto significa que la regla SOLO se
+     aplica a un elemento <p> que además tenga id="normal".
+     Si el id="normal" estuviera en otro tipo de elemento (por ejemplo
+     un <div>), esta regla NO se aplicaría, porque exige que sea
+     específicamente un párrafo.
+
+  2) *#destacado { border-style: solid; border-color: blue; border-width: 2px; }
+     SELECTOR COMPUESTO: combina el selector universal "*" con el
+     selector de id "#destacado". El asterisco aquí es redundante
+     a nivel práctico, porque un id ya identifica un único elemento
+     sin importar su tipo. Esta regla aplica un borde sólido azul de
+     2px a CUALQUIER elemento que tenga id="destacado",
+     independientemente de si es un <p>, una <table>, un <div>, etc.
+
+  3) #distinto { background-color: #9EC7EB; color: red; }
+     SELECTOR DE ID simple (sin restricción de tipo de elemento).
+     Aplica fondo celeste claro y texto rojo a cualquier elemento
+     con id="distinto".
+
+
+
+  APLICACIONES DE LAS REGLAS (en el <body>) Y SU EFECTO:
+
+  <p id="normal">Este es un párrafo</p>
+  --> Coincide con el selector p#normal. Se muestra en Arial/Helvetica,
+      tamaño 11px, en negrita (bold). Sin bordes ni colores especiales.
+
+  <p id="destacado">Este es otro párrafo</p>
+  --> Coincide con el selector *#destacado (por el id, sin importar
+      que sea un párrafo). Se muestra con un borde sólido azul de 2px
+      alrededor del párrafo. No recibe los estilos de p#normal porque
+      su id es distinto ("destacado", no "normal").
+
+  <table id="destacado"><tr><td>Esta es una tabla</td></tr></table>
+  --> También coincide con *#destacado (mismo id repetido, válido para
+      el selector aunque no sea válido en HTML). La tabla recibe el
+      mismo borde sólido azul de 2px.
+
+  <p id="distinto">Este es el último párrafo</p>
+  --> Coincide con el selector #distinto. Se muestra con fondo celeste
+      (#9EC7EB) y texto en color rojo.
+============================================================ -->
+
+<p id="normal">Este es un párrafo</p>
+
+<p id="destacado">Este es otro párrafo</p>
+
+<table id="destacado"><tr><td>Esta es una tabla</td></tr></table>
+
+<p id="distinto">Este es el último párrafo</p>
+
+</body>
+</html>

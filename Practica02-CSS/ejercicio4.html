@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+
+  <title>Ejercicio 4 - CSS: Comparación de efectos</title>
+  <style>
+    * {
+      color: green;
+    }
+    a:link {
+      color: gray;
+    }
+    a:visited {
+      color: blue;
+    }
+    a:hover {
+      color: fuchsia;
+    }
+    a:active {
+      color: red;
+    }
+    p {
+      font-family: arial, helvetica;
+      font-size: 10px;
+      color: black;
+    }
+    .contenido {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ejercicio 4 Comparaci&oacute;n de c&oacute;digos</h1>
+<hr />
+
+<!-- ============================================================
+  DECLARACIONES BASE (dadas por el ejercicio, ya cargadas en el <style>):
+
+  * { color: green; }
+  a:link { color: gray; }
+  a:visited { color: blue; }
+  a:hover { color: fuchsia; }
+  a:active { color: red; }
+  p { font-family: arial,helvetica; font-size: 10px; color: black; }
+  .contenido { font-size: 14px; font-weight: bold; }
+
+  ===========================================================
+  CÓDIGO A (clase "contenido" aplicada al <p>, con estilo en línea):
+
+  <body>
+    <p class="contenido" style="font-weight: normal;">
+      Este es un texto...
+    </p>
+    <table>
+      <tr><td>Y esta es una tabla...</td></tr>
+      <tr><td><a href="...">con un enlace</a></td></tr>
+    </table>
+  </body>
+
+  ANÁLISIS:
+  - El <p> tiene la clase "contenido" Y un estilo en línea.
+    Para la propiedad font-size: la regla "p" da 10px y la regla
+    ".contenido" da 14px. Como un selector de clase tiene mayor
+    especificidad que un selector de elemento, gana .contenido:
+    el texto se ve en 14px.
+  - Para font-weight: la regla ".contenido" da bold, pero el
+    estilo EN LÍNEA (style="font-weight: normal;") tiene la
+    máxima prioridad de todas (por encima de clases, ids y
+    selectores de elemento). Por lo tanto gana el estilo en línea:
+    el texto NO está en negrita, se ve en peso normal.
+  - Para color: la regla "p" da black, que tiene más especificidad
+    que el selector universal "*" (que da green). Gana "p": el
+    texto del párrafo se ve en NEGRO.
+  - El texto "Y esta es una tabla..." está dentro de <td>, que no
+    tiene ninguna regla propia ni hereda de .contenido (porque la
+    tabla no tiene esa clase). Por lo tanto solo aplica el selector
+    universal *: se ve en VERDE.
+  - El enlace <a href="...">con un enlace</a> no fue visitado, por
+    lo que aplica a:link: se ve en GRIS (no en verde, porque
+    a:link es más específico que el selector universal *).
+
+  RESULTADO DEL CÓDIGO A:
+  - Párrafo: texto en negro, fuente Arial 14px, SIN negrita (normal).
+  - Texto de la tabla (fuera del párrafo): verde (por el *).
+  - Enlace: gris (por a:link), sin importar el *.
+
+  ===========================================================
+  CÓDIGO B (clase "contenido" aplicada al <body> completo):
+
+  <body class="contenido">
+    <p> Este es un texto...</p>
+    <table>
+      <tr><td>Y esta es una tabla...</td></tr>
+      <tr><td><a href="...">con un enlace</a></td></tr>
+    </table>
+  </body>
+
+  ANÁLISIS:
+  - Aquí la clase "contenido" (font-size: 14px; font-weight: bold;)
+    se aplica al <body>, NO al <p> directamente. Como font-size y
+    font-weight SON propiedades heredables, en principio el <p>
+    podría heredar 14px y bold del body.
+  - Sin embargo, el <p> tiene su PROPIA regla declarada directamente
+    sobre el elemento "p" (font-size: 10px; color: black;), que es
+    más específica que la herencia desde el body. Una regla directa
+    sobre el elemento siempre tiene prioridad sobre un valor heredado.
+    Por lo tanto, el párrafo se muestra en 10px (no 14px).
+  - font-weight NO está definido en la regla "p", así que en este
+    caso sí se hereda el valor bold desde .contenido en el body:
+    el párrafo se ve EN NEGRITA.
+  - color: la regla "p" define black explícitamente, por lo que el
+    texto del párrafo es NEGRO (igual que en el código A).
+  - El texto de la tabla (fuera del párrafo, sin reglas propias)
+    SÍ hereda font-size: 14px y font-weight: bold desde el body
+    (vía la clase .contenido), además del color: en este caso no
+    hay un "p" ni un "*" con más especificidad que compita por
+    color dentro del <td>, así que el color heredado desde * (green)
+    se aplica igualmente: se ve en VERDE, pero en 14px y en negrita
+    (a diferencia del código A, donde la tabla se veía en el tamaño
+    por defecto del navegador).
+  - El enlace, igual que antes, no fue visitado, por lo que se
+    muestra en GRIS por a:link (que tiene más especificidad que el
+    selector universal y que la herencia desde el body).
+
+  RESULTADO DEL CÓDIGO B:
+  - Párrafo: texto en negro, fuente Arial 10px, EN NEGRITA (heredada
+    del body, ya que la regla "p" no define font-weight).
+  - Texto de la tabla (fuera del párrafo): verde, en 14px y negrita
+    (heredado del body vía la clase).
+  - Enlace: gris (por a:link), igual que en el código A.
+
+  ===========================================================
+  CONCLUSIÓN GENERAL:
+  La diferencia clave entre ambos códigos es DÓNDE se aplica la
+  clase .contenido (al <p> puntualmente vs. al <body> completo).
+  Esto demuestra cómo funciona la HERENCIA: cuando la clase se aplica
+  a un ancestro (body), sus propiedades heredables (font-size,
+  font-weight) se propagan a todos los descendientes que no tengan
+  una regla más específica que las sobrescriba. El párrafo, al tener
+  su propia regla "p" para font-size, no hereda ese valor del body,
+  pero sí hereda font-weight porque la regla "p" no lo especifica.
+  La tabla, al no tener reglas propias, hereda todo lo que pueda
+  desde el body en el código B, mostrando un resultado visualmente
+  distinto al código A.
+============================================================ -->
+
+<h2>C&oacute;digo A: clase aplicada al &lt;p&gt; + estilo en l&iacute;nea</h2>
+<p class="contenido" style="font-weight: normal;">
+  Este es un texto...............
+</p>
+<table>
+  <tr>
+    <td>Y esta es una tabla.......</td>
+  </tr>
+  <tr>
+    <td><a href="http://www.google.com.ar">con un<br />enlace</a></td>
+  </tr>
+</table>
+
+<hr />
+
+<h2>C&oacute;digo B: clase aplicada al &lt;body&gt;</h2>
+<div class="contenido">
+  <p>Este es un texto................</p>
+  <table>
+    <tr>
+      <td>Y esta es una tabla.......</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.google.com.ar">con<br />un enlace</a></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

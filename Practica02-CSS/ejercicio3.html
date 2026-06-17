@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Ejercicio 3 - CSS: Clases y prioridades</title>
+  <style>
+    p.quitar {
+      color: red;
+    }
+    *.desarrollo {
+      font-size: 8px;
+    }
+    .importante {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ejercicio 3 &mdash; Clases y prioridades</h1>
+<hr />
+
+<!-- ============================================================
+  DECLARACIONES DE REGLAS :
+
+  1) p.quitar { color: red; }
+     SELECTOR COMPUESTO: elemento "p" + clase "quitar". Solo aplica
+     a párrafos que tengan class="quitar". Pone el texto en rojo.
+     Si la clase "quitar" estuviera en un <h1>, esta regla NO
+     aplicaría (porque exige que sea específicamente un <p>).
+
+  2) *.desarrollo { font-size: 8px; }
+     SELECTOR COMPUESTO: universal "*" + clase "desarrollo". A
+     diferencia del caso anterior, el asterisco no restringe el tipo
+     de elemento, por lo que aplica a CUALQUIER elemento con
+     class="desarrollo" (sea <p>, <div>, <span>, etc.). Reduce el
+     tamaño de fuente a 8px.
+
+  3) .importante { font-size: 20px; }
+     SELECTOR DE CLASE simple (sin restricción de tipo). Aplica a
+     cualquier elemento con class="importante". Aumenta el tamaño
+     de fuente a 20px.
+
+  APLICACIONES DE LAS REGLAS (en el <body>) Y SU EFECTO:
+
+  <p class="desarrollo">En este primer párrafo</p>
+ 
+
+  <p class="quitar">Este párrafo debe ser quitado</p>
+  --> Coincide con p.quitar. Se muestra en color ROJO. El nombre de
+      la clase ("quitar") es solo una convención semántica elegida
+      por el desarrollador para identificar contenido pendiente de
+      eliminar; CSS no "quita" nada por sí mismo, solo pone el texto
+      en rojo como señal visual de advertencia.
+
+  <p>En este otro párrafo trataremos otro tema...</p>
+  --> No tiene ninguna clase ni id, por lo que NO coincide con
+      ninguna de las tres reglas declaradas. Se muestra con los
+      estilos por defecto del navegador (fuente y tamaño normales,
+      color negro).
+
+  <p class="importante">Y este es el párrafo más importante...</p>
+  --> Coincide con .importante. Se muestra con fuente de 20px
+      (bastante grande), sin color especial.
+
+  <h1 class="quitar">Este encabezado también debe ser quitado...</h1>
+  --> El selector declarado es p.quitar (restringido a párrafos),
+      por lo tanto NO aplica a este <h1>, aunque tenga la misma
+      clase "quitar". El encabezado se muestra con el estilo por
+      defecto de <h1> (texto grande y en negrita), SIN el color rojo,
+      porque la regla exige que el elemento sea un <p>.
+
+  <p class="quitar importante">Se pueden aplicar varias clases a la vez</p>
+  --> CLASES MÚLTIPLES: este elemento tiene DOS clases asignadas al
+      mismo tiempo, separadas por un espacio dentro del mismo atributo
+      class. Esto hace que coincida con AMBAS reglas simultáneamente:
+      - p.quitar       --> aporta color: red;
+      - .importante    --> aporta font-size: 20px;
+      Como ambas reglas afectan a PROPIEDADES DISTINTAS (color y
+      font-size), no hay conflicto entre ellas: el navegador combina
+      ambos estilos y el párrafo se muestra en rojo Y con tamaño 20px
+      al mismo tiempo. Esto demuestra que un elemento puede recibir
+      estilos de varias clases distintas a la vez, siempre que no
+      definan la misma propiedad (en cuyo caso entraría a jugar la
+      especificidad y el orden de la cascada).
+============================================================ -->
+
+<p class="desarrollo">
+  En este primer párrafo trataremos lo siguiente:
+  <br />xxxxxxxxxxxxxxxxxxxxxxxxx
+</p>
+
+<p class="quitar">
+  Este párrafo debe ser quitado de la obra;
+  <br />xxxxxxxxxxxxxxxxxxxxxxxxx
+</p>
+
+<p>
+  En este otro párrafo trataremos otro tema:<br />
+  xxxxxxxxxxxxxxxxxxxxxxxxx
+</p>
+
+<p class="importante">
+  Y este es el párrafo más importante de la obra
+  <br />xxxxxxxxxxxxxxxxxxxxxxxxx
+</p>
+
+<h1 class="quitar">Este encabezado también debe ser quitado de la obra</h1>
+
+<p class="quitar importante">Se pueden aplicar varias clases a la vez</p>
+
+</body>
+</html>

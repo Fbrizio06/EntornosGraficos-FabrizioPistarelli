@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+
+  <title>Ejercicio 5 - CSS: Escribir reglas</title>
+  <style>
+    /* ============================================================
+       1) Los textos enfatizados dentro de cualquier título deben
+          ser rojos.
+
+       El texto "enfatizado" en HTML se marca con <em> (o <i>).
+       "Cualquier título" se refiere a h1, h2, h3, h4, h5, h6.
+       Usamos un selector descendiente para cada nivel de título,
+       agrupados con coma para no repetir la declaración.
+    ============================================================ */
+    h1 em, h2 em, h3 em, h4 em, h5 em, h6 em {
+      color: red;
+    }
+
+    /* ============================================================
+       2) Cualquier elemento que tenga asignado el atributo "href"
+          y que esté dentro de cualquier párrafo que a su vez esté
+          dentro de un bloque debe ser color negro.
+
+       "Bloque" se interpreta como <div>. "Elemento con atributo
+       href" se selecciona con el selector de atributo [href].
+       Se necesita un selector descendiente de tres niveles:
+       div -> p -> [href]
+    ============================================================ */
+    div p [href] {
+      color: black;
+    }
+
+    /* ============================================================
+       3) El texto de las listas no ordenadas que estén dentro del
+          bloque identificado como "ultimo" debe ser amarillo, pero
+          si es un enlace a otra página debe ser azul.
+
+       Lista no ordenada = <ul>. Bloque con id="ultimo" = #ultimo.
+       Primero seteamos amarillo para el <ul> completo (se hereda
+       a los <li> y su texto). Luego, una regla más específica para
+       los enlaces <a> dentro de esa lista, que sobrescribe el color
+       solo en los enlaces, dejándolos azules.
+    ============================================================ */
+    #ultimo ul {
+      color: yellow;
+    }
+    #ultimo ul a {
+      color: blue;
+    }
+
+    /* ============================================================
+       4) Los elementos identificados como "importante" dentro de
+          cualquier bloque deben ser verdes, pero si están dentro
+          de un título deben ser rojos.
+
+       "Identificados como importante" = class="importante".
+       "Dentro de cualquier bloque" = dentro de un <div>.
+       "Dentro de un título" = dentro de h1...h6.
+       La segunda regla es más específica (selector más largo /
+       más anidado), por lo que gana sobre la primera cuando ambas
+       condiciones se cumplen a la vez (título dentro de un div).
+    ============================================================ */
+    div .importante {
+      color: green;
+    }
+    h1 .importante, h2 .importante, h3 .importante,
+    h4 .importante, h5 .importante, h6 .importante {
+      color: red;
+    }
+
+    /* ============================================================
+       5) Todos los elementos h1 que especifiquen el atributo title,
+          cualquiera que sea su valor, deben ser azules.
+
+       Selector de atributo combinado con selector de elemento:
+       h1[title] selecciona cualquier <h1> que tenga el atributo
+       title definido, sin importar su valor.
+    ============================================================ */
+    h1[title] {
+      color: blue;
+    }
+
+    /* ============================================================
+       6) El color de los enlaces en las listas ordenadas debe ser
+          azul para los no visitados, y violeta para los visitados,
+          y además no deben aparecer subrayados.
+
+       Lista ordenada = <ol>. Usamos selectores descendientes
+       combinados con las pseudo-clases :link y :visited.
+       text-decoration: none; quita el subrayado en ambos casos.
+    ============================================================ */
+    ol a:link {
+      color: blue;
+      text-decoration: none;
+    }
+    ol a:visited {
+      color: violet;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Ejercicio 5 &mdash; Reglas CSS solicitadas</h1>
+<hr />
+
+<h2>1) <em>Texto enfatizado en rojo dentro de t&iacute;tulos</em></h2>
+
+<h2>4) Bloque con elemento <span class="importante">importante en verde</span></h2>
+<h3>4) T&iacute;tulo con elemento <span class="importante">importante en rojo</span></h3>
+
+<h1 title="Ejemplo de título con atributo title">5) Este h1 tiene atributo title (azul)</h1>
+
+<div id="contenedor-generico">
+  <p>2) P&aacute;rrafo dentro de un bloque, con un <a href="http://www.ejemplo.com">enlace en negro</a></p>
+</div>
+
+<div id="ultimo">
+  <h3>3) Lista dentro del bloque "ultimo"</h3>
+  <ul>
+    <li>Texto amarillo simple</li>
+    <li>Otro texto amarillo</li>
+    <li><a href="http://www.ejemplo.com">Enlace en azul dentro de la lista</a></li>
+  </ul>
+</div>
+
+<h3>6) Enlaces dentro de lista ordenada (sin subrayado)</h3>
+<ol>
+  <li><a href="http://www.no-visitado-ejemplo.com">Enlace no visitado (azul)</a></li>
+  <li><a href="http://www.google.com.ar">Enlace probablemente visitado (violeta)</a></li>
+</ol>
+
+</body>
+</html>
