@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="author" content="Alumno UTN-FRRo" />
+  <title>Ejercicio 1 - Manejo de Bases de Datos con PHP</title>
+</head>
+<body>
+
+<h1>Ejercicio 1 &mdash; Completar</h1>
+<p>Las respuestas completas se encuentran en los comentarios del c&oacute;digo fuente de este documento.</p>
+<hr />
+
+<!--
+=============================================================
+"Para inicializar esta conexión, PHP ofrece la función ____"
+=============================================================
+
+RESPUESTA: mysqli_connect()
+
+Esta función abre una nueva conexión a un servidor MySQL.
+Ejemplo de uso:
+  $link = mysqli_connect($servidor, $usuario, $clave, $base_datos);
+-->
+
+<!--
+=============================================================
+"Todos sus parámetros son opcionales, pero hay tres de ellos
+que generalmente son necesarios: ____"
+=============================================================
+
+RESPUESTA:
+Los tres parámetros que generalmente se utilizan son:
+
+1. host: el nombre o dirección del servidor MySQL
+   (por ejemplo "localhost" si la base está en la misma máquina).
+
+2. username: el nombre de usuario con el que se autentica
+   contra el servidor MySQL (por ejemplo "root").
+
+3. password: la contraseña correspondiente a ese usuario
+   (en instalaciones locales de XAMPP, por defecto suele ser
+   una cadena vacía "").
+
+Un cuarto parámetro opcional, dbname, permite indicar directamente
+la base de datos a utilizar en el mismo momento de conectar, aunque
+también puede seleccionarse después con mysqli_select_db().
+-->
+
+<!--
+=============================================================
+"Una vez abierta la conexión, se debe seleccionar una base de
+datos para su uso, mediante la función ____. Esta función debe
+pasar como parámetro ____"
+=============================================================
+
+RESPUESTA: mysqli_select_db()
+
+Esta función selecciona, sobre una conexión ya abierta, qué base
+de datos se va a utilizar para las próximas consultas.
+
+Parámetros que recibe:
+1. El recurso/objeto de conexión (el valor devuelto por mysqli_connect()).
+2. El nombre de la base de datos que se desea utilizar (por ejemplo
+   "Capitales").
+
+Ejemplo:
+  mysqli_select_db($link, "Capitales");
+
+NOTA: si la base de datos ya se especificó como cuarto parámetro
+de mysqli_connect(), este paso es opcional, pero suele incluirse
+igualmente por claridad o para cambiar de base más adelante en
+el mismo script.
+-->
+
+<!--
+=============================================================
+"La función mysqli_query() se utiliza para ____ y requiere como
+parámetros ____"
+=============================================================
+
+RESPUESTA:
+mysqli_query() se utiliza para ENVIAR Y EJECUTAR una sentencia SQL
+(SELECT, INSERT, UPDATE, DELETE, etc.) contra la base de datos
+seleccionada en una conexión abierta.
+
+Parámetros que requiere:
+1. El recurso/objeto de conexión (el devuelto por mysqli_connect()).
+2. La sentencia SQL a ejecutar, como una cadena de texto.
+
+Ejemplo:
+  $resultado = mysqli_query($link, "SELECT * FROM ciudades");
+
+Si la sentencia es un SELECT, la función devuelve un conjunto de
+resultados (resultset) que luego se recorre con funciones como
+mysqli_fetch_array(). Si es un INSERT, UPDATE o DELETE, devuelve
+true o false según si la operación se ejecutó correctamente.
+-->
+
+<!--
+=============================================================
+"La cláusula or die() se utiliza para ____ y la función
+mysqli_error() se puede usar para ____"
+=============================================================
+
+RESPUESTA:
+
+or die():
+Se utiliza para DETENER LA EJECUCIÓN del script inmediatamente si
+la expresión a su izquierda resulta falsa (por ejemplo, si la
+conexión o la consulta fallaron), mostrando un mensaje de error
+en pantalla en lugar de continuar ejecutando código que
+probablemente fallaría también (por ejemplo, intentar recorrer un
+resultado que nunca se generó).
+
+Ejemplo:
+  $link = mysqli_connect("localhost","root","","Capitales")
+          or die("No se pudo conectar a la base de datos");
+
+mysqli_error():
+Se utiliza para OBTENER EL TEXTO DEL ÚLTIMO ERROR ocurrido en la
+conexión MySQL indicada. Es muy útil combinada con or die() para
+mostrar el motivo exacto del fallo (por ejemplo, un error de
+sintaxis SQL, una tabla inexistente, etc.) en lugar de un mensaje
+genérico, lo que facilita mucho la depuración.
+
+Ejemplo:
+  $resultado = mysqli_query($link, $sql)
+               or die("Error en la consulta: " . mysqli_error($link));
+-->
+
+<!--
+=============================================================
+EXPLICACIÓN DEL CÓDIGO DADO:
+
+<?php while ($fila = mysqli_fetch_array($vResultado)) { ?>
+  <tr>
+    <td><?php echo ($fila[0]); ?></td>
+    <td><?php echo ($fila[1]); ?></td>
+    <td><?php echo ($fila[2]); ?></td>
+  </tr>
+<?php } 
+mysqli_free_result($vResultado);
+mysqli_close($link);
+?>
+=============================================================
+
+RESPUESTA:
+
+Este fragmento recorre fila por fila el conjunto de resultados
+($vResultado) que devolvió una consulta SELECT previa, e imprime
+cada fila como una fila de una tabla HTML.
+
+Explicación paso a paso:
+
+1. while ($fila = mysqli_fetch_array($vResultado)) { ... }
+   mysqli_fetch_array() obtiene la SIGUIENTE fila del resultado
+   cada vez que se la llama, devolviéndola como un array (en este
+   caso, accesible por índice numérico: $fila[0], $fila[1], etc.,
+   correspondientes a cada columna del SELECT en el orden en que
+   fueron consultadas). Cuando ya no quedan más filas por leer,
+   la función devuelve false, y el bucle while se corta
+   automáticamente. Es el patrón estándar para recorrer TODOS los
+   resultados de una consulta, fila por fila.
+
+2. Dentro del bucle, por cada fila se genera una fila <tr> de una
+   tabla HTML, con tres celdas <td> que muestran los valores de
+   las tres primeras columnas de esa fila ($fila[0], $fila[1],
+   $fila[2]) usando echo.
+
+3. Al salir del while (cuando ya no hay más filas), se llama a:
+   - mysqli_free_result($vResultado): libera de la memoria del
+     servidor MySQL el conjunto de resultados, ya que no se va a
+     volver a usar. Es una buena práctica para liberar recursos,
+     aunque PHP también lo hace automáticamente al finalizar el
+     script.
+   - mysqli_close($link): cierra la conexión abierta con el
+     servidor MySQL, ya que no se necesitan más consultas en
+     este script.
+
+   NOTA: en el código original del enunciado hay dos pequeños
+   errores tipográficos que se corrigieron en esta explicación:
+   $fila[2'] debería ser $fila[2] (sin la comilla de más), y la
+   etiqueta <td colspan="5"> sin cerrar correctamente queda
+   suelta; en una implementación real ese <td> extra no debería
+   estar ahí, ya que cada <tr> del bucle ya se cierra
+   correctamente antes de la siguiente iteración.
+-->
+
+<p><em>Ver el c&oacute;digo fuente del documento para leer las respuestas completas.</em></p>
+
+</body>
+</html>
